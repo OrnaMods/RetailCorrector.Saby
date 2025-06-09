@@ -8,7 +8,6 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Validators;
-using static System.Net.WebRequestMethods;
 
 [assembly: Guid("9f838119-7899-4c77-92a1-4d4060d6a3c8")]
 
@@ -147,7 +146,7 @@ namespace Saby
                 {
                     Created = new DateTime(1970,1,1) + TimeSpan.FromSeconds(raw["dateTime"]!.GetValue<long>()),
                     FiscalSign = raw["fiscalSign"]!.GetValue<long>().ToString(),
-                    RoundedSum = raw["totalSum"]!.GetValue<uint>(),
+                    TotalSum = raw["totalSum"]!.GetValue<uint>(),
                     Operation = (Operation)raw["operationType"]!.GetValue<int>(),
                     Items = new Position[raw["items"]!.AsArray().Count],
                     Payment = new Payment
@@ -180,35 +179,3 @@ namespace Saby
         }
     }
 }
-
-/*{
-    "receipt": {
-      "userInn": "183100519374",
-      "operator": "Дятел Надежда Алексеевна",
-      "kktRegId": "0005661990052240",
-      "shiftNumber": 287,
-      "fiscalDocumentNumber": 21993,
-      "fiscalDriveNumber": "7381440700197066",
-      "requestNumber": 19,
-      "taxationType": 1,
-      "items": [
-        {
-          "nds": 6,
-          "productType": 1,
-          "paymentType": 4,
-          "itemsQuantityMeasure": 0
-        }
-      ],
-      "ndsNo": 36300,
-      "retailPlace": "г. Ижевск, ул. Удмуртская, 210",
-      "fiscalDocumentFormatVer": 4,
-      "NDSData": {
-        "amountsNds": [
-          {
-            "nds": 6,
-            "ndsSum": 36300
-          }
-        ]
-      }
-    }
-  }*/
